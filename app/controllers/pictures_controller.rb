@@ -17,6 +17,17 @@ class PicturesController < ApplicationController
 		end
 	end
 
+	def edit
+		@picture = Picture.find(params[:id])
+	end
+
+	def update
+		@picture = Picture.find(params[:id])
+		@picture.update(params[:picture].permit(:feeling, :image))
+		redirect_to pictures_path
+		flash[:notice] = "Picture edited successfully"
+	end
+
 	def destroy
 		@picture = Picture.find(params[:id])
 		@picture.destroy

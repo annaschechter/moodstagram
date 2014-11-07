@@ -2,5 +2,6 @@
 <% @pictures.each do |picture|%>
 	<%= image_tag picture.image.url(:thumb) %>
 	<%= picture.feeling %>
-	<%= link_to "Delete picture", picture_path(picture), method: :delete %>
+	<%= link_to "Delete ##{picture.feeling.downcase}", picture_path(picture), method: :delete %>
+	<%= link_to "Edit ##{picture.feeling.downcase}", edit_picture_path(picture) %>
 <% end %>
