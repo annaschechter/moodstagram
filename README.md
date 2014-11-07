@@ -1,4 +1,3 @@
-== README
 
 Colourgram is a clone of the popular photosharing apllication Instagram. In Colourgram users will be sharing photos where the dominating colour will represent their mood/feelings on a particular day or at a paticular time. 
 
