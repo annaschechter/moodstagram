@@ -11,7 +11,9 @@
 	<% else %>
 		No comments yet
 	<% end %>
-<%= link_to "Comment", new_picture_comment_path(picture), id: "comment-#{picture.feeling}" %>
-<%= link_to "Delete ##{picture.feeling.downcase}", picture_path(picture), method: :delete %>
-<%= link_to "Edit ##{picture.feeling.downcase}", edit_picture_path(picture) %>
+	<%= link_to "Comment", new_picture_comment_path(picture), id: "comment-#{picture.feeling}" %>
+	<% if user_signed_in? && current_user.id == picture.user_id %>
+		<%= link_to "Delete ##{picture.feeling.downcase}", picture_path(picture), method: :delete %>
+		<%= link_to "Edit ##{picture.feeling.downcase}", edit_picture_path(picture) %>
+	<% end %>
 <% end %>

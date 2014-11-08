@@ -8,33 +8,38 @@ describe 'pictures' do
 		create_picture
 	end
 
+
 	it 'should display an option to post a picture' do
 		visit '/pictures'
 		expect(page).to have_link 'Post picture'
 	end
 
-	it 'can be uploaded' do
-		expect(Picture.all.count).to equal 1
+
+	describe 'creating pictures' do
+
+		it 'can be uploaded' do
+			expect(Picture.all.count).to equal 1
+		end		
+
+		it 'only signed in users can upload pictures' do
+			click_link 'Sign out'
+			click_link 'Post picture'
+			expect(page).not_to have_button 'Create picture'
+			expect(page).to have_content 'Log in'
+		end
+
+		it 'only allows to create pictures with images that are not empty' do
+			click_link 'Post picture'
+			fill_in 'Feeling', with: "feeling"  
+			click_button 'Create Picture'
+			expect(page).not_to have_css 'img'
+			expect(page).to have_content "You did not choose a valid file"
+		end
+
 	end
 
 	it 'uploaded pictures are displayed on the main page' do
 		expect(page).to have_css 'img'
-	end
-
-	it 'can be deleted' do
-		create_picture("sad")
-		click_link 'Delete #happy'
-		expect(page).not_to have_content 'happy'
-		expect(page).to have_content 'Picture deleted successfully'
-		expect(page).to have_content 'sad'
-	end
-
-	it 'can be edited' do
-		click_link 'Edit #happy'
-		fill_in 'Feeling', with: "not happy"
-		click_button 'Update Picture'
-		expect(page).to have_content 'Picture edited successfully'
-		expect(page).to have_content 'not happy'
 	end
 
 	it 'every picture has its own page' do
@@ -43,19 +48,43 @@ describe 'pictures' do
 		expect(page).to have_content 'happy'
 	end
 
-	it 'only signed in users can upload pictures' do
-		click_link 'Sign out'
-		click_link 'Post picture'
-		expect(page).not_to have_button 'Create picture'
-		expect(page).to have_content 'Log in'
+	describe 'deleting pictures' do
+
+		it 'can be deleted' do
+			create_picture("sad")
+			click_link 'Delete #happy'
+			expect(page).not_to have_content 'happy'
+			expect(page).to have_content 'Picture deleted successfully'
+			expect(page).to have_content 'sad'
+		end
+
+		it 'only the author of the picture can see the link to delete the picture' do
+			click_link 'Sign out'
+			user_sign_up("sam@test.com", 91234567)
+			visit '/pictures'
+			expect(page).not_to have_link 'Delete #happy'
+		end
+
 	end
 
-	it 'only allows to create pictures with images that are not empty' do
-		click_link 'Post picture'
-		fill_in 'Feeling', with: "feeling"  
-		click_button 'Create Picture'
-		expect(page).not_to have_css 'img'
-		expect(page).to have_content "You did not choose a valid file"
+	describe 'editing pictures' do
+
+		it 'can be edited' do
+			click_link 'Edit #happy'
+			fill_in 'Feeling', with: "not happy"
+			click_button 'Update Picture'
+			expect(page).to have_content 'Picture edited successfully'
+			expect(page).to have_content 'not happy'
+		end
+
+		it 'only the author of the picture can see the link to edit the piscture' do
+			click_link 'Sign out'
+			user_sign_up("sam@test.com", 91234567)
+			visit '/pictures'
+			expect(page).not_to have_link 'Edit #happy'
+		end
+		
 	end
+
 
 end

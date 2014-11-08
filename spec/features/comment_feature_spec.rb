@@ -24,7 +24,7 @@ describe 'comment' do
 
 	it 'only allows to post non-empty comments' do
 		find('#comment-happy').click
-		# fill_in 'Message', with: ' '
+		fill_in 'Message', with: ' '
 		click_button 'Post comment'
 		expect(page).to have_content 'Your comment cannot be blank!'
 	end
