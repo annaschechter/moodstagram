@@ -8,7 +8,6 @@ class CommentsController < ApplicationController
 	def create
 		@picture = Picture.find(params[:picture_id])
 		comment = @picture.comments.create(params[:comment].permit(:message))
-		# comment.time_added = Time.now
-		redirect_to pictures
+		redirect_to pictures_path
 	end
 end

@@ -1,4 +1,16 @@
 <%= image_tag(@picture.image.url(:thumb)) %>
 <%= @picture.feeling %>
+	Comments:
+	<ul>
+	<% if @picture.comments.any? %>
+		<%= @picture.comments.each do |comment|%>
+			<li><%= comment.created_at %>
+			<%= comment.message %>
+			</li>
+		<% end %>
+	</ul>
+	<% else %>
+		No comments yet
+	<% end %>
 <%= link_to "Delete ##{@picture.feeling.downcase}", picture_path(@picture), method: :delete %>
 <%= link_to "Edit ##{@picture.feeling.downcase}", edit_picture_path(@picture) %>
