@@ -53,5 +53,7 @@ Rails.application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
-  resources :pictures
+  resources :pictures do
+    resources :comments
+  end
 end
