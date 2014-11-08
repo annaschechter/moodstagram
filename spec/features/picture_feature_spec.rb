@@ -4,6 +4,7 @@ require 'helpers/helper'
 describe 'pictures' do
 
 	before do
+		user_sign_up
 		create_picture
 	end
 
@@ -12,7 +13,7 @@ describe 'pictures' do
 		expect(page).to have_link 'Post picture'
 	end
 
-	it 'can be upload a picture' do
+	it 'can be uploaded' do
 		expect(Picture.all.count).to equal 1
 	end
 
@@ -40,6 +41,13 @@ describe 'pictures' do
 		find('#happy').click
 		expect(page).to have_css 'img'
 		expect(page).to have_content 'happy'
+	end
+
+	it 'only signed in users can upload pictures' do
+		click_link 'Sign out'
+		click_link 'Post picture'
+		expect(page).not_to have_button 'Create picture'
+		expect(page).to have_content 'Log in'
 	end
 
 end

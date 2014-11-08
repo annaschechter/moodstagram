@@ -1,8 +1,8 @@
 
-Colourgram is a clone of the popular photosharing apllication Instagram. In Colourgram users will be sharing photos where the dominating colour will represent their mood/feelings on a particular day or at a paticular time. 
+Moodstagram is a clone of the popular photosharing apllication Instagram. In Moodstagram users will be sharing photos which will reflect their mood/feelings on a particular day or at a paticular time. 
 
 
-Colourgram will have the following functionality:
+Moodstagram will have the following functionality:
 
 
 * Users can sign-up, log-in and log-out

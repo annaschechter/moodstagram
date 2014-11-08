@@ -1,7 +1,7 @@
 <a id="link-to-post-a-picture" href="/pictures/new">Post picture</a>
 <% @pictures.each do |picture|%>
 	<%= link_to image_tag(picture.image.url(:thumb)), picture_path(picture), id: "#{picture.feeling}" %>
-	<%= picture.feeling %>
+	Feeling: <%= picture.feeling %>
 	Comments:
 	<% if picture.comments.any? %>
 		<%= picture.comments.each do |comment|%>

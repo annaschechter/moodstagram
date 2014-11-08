@@ -4,6 +4,7 @@ require 'helpers/helper'
 describe 'comment' do 
 
 	before do 
+		user_sign_up
 		create_picture
 	end
 
@@ -12,6 +13,13 @@ describe 'comment' do
 		fill_in 'Message', with: 'message'
 		click_button 'Post comment'
 		expect(page).to have_content 'message'
+	end
+
+	it 'only signed in users can leave a comment for a picture' do
+		click_link 'Sign out'
+		find('#comment-happy').click
+		expect(page).not_to have_button 'Post comment'
+		expect(page).to have_content 'Sign in'
 	end 
 	
 end
