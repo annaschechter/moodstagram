@@ -43,4 +43,10 @@ describe 'pictures' do
 		expect(page).to have_content 'not happy'
 	end
 
+	it 'every picture has its own page' do
+		find('#happy').click
+		expect(page).to have_css 'img'
+		expect(page).to have_content 'happy'
+	end
+
 end
