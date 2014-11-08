@@ -50,4 +50,12 @@ describe 'pictures' do
 		expect(page).to have_content 'Log in'
 	end
 
+	it 'only allows to create pictures with images that are not empty' do
+		click_link 'Post picture'
+		fill_in 'Feeling', with: "feeling"  
+		click_button 'Create Picture'
+		expect(page).not_to have_css 'img'
+		expect(page).to have_content "You did not choose a valid file"
+	end
+
 end
