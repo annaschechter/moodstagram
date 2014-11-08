@@ -7,6 +7,7 @@
 		<%= picture.comments.each do |comment|%>
 			<%= comment.created_at %>
 			<%= comment.message %>
+			<%= link_to "Delete comment", picture_comment_path(picture, comment), method: :delete, id: "delete-comment-#{comment.message}" %>
 		<% end %>
 	<% else %>
 		No comments yet

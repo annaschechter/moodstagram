@@ -9,9 +9,7 @@ describe 'comment' do
 	end
 
 	it 'users can leave a comment for a picture' do
-		find('#comment-happy').click
-		fill_in 'Message', with: 'message'
-		click_button 'Post comment'
+		leave_comment_for_happy
 		expect(page).to have_content 'message'
 	end
 
@@ -27,6 +25,13 @@ describe 'comment' do
 		fill_in 'Message', with: ' '
 		click_button 'Post comment'
 		expect(page).to have_content 'Your comment cannot be blank!'
+	end
+
+	it 'users can delete comments' do
+		leave_comment_for_happy
+		find('#delete-comment-message').click
+		expect(page).to have_content 'Comment deleted successfully'
+		expect(page).not_to have_content 'message'
 	end
 	
 end

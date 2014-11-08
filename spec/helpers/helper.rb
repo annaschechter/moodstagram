@@ -14,3 +14,10 @@
 		fill_in 'Password confirmation', with: password
 		click_button 'Sign up'
 	end
+
+	
+	def leave_comment_for_happy
+		find('#comment-happy').click
+		fill_in 'Message', with: 'message'
+		click_button 'Post comment'
+	end
