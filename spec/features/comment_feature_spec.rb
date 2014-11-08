@@ -33,5 +33,13 @@ describe 'comment' do
 		expect(page).to have_content 'Comment deleted successfully'
 		expect(page).not_to have_content 'message'
 	end
+
+	it 'users can only delete comments that they wrote' do
+		leave_comment_for_happy
+		click_link 'Sign out'
+		user_sign_up("sam@test.com", 91234567)
+		visit '/pictures'
+		expect(page).not_to have_selector'#delete-comment-message'
+	end
 	
 end

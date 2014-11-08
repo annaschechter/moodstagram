@@ -10,6 +10,7 @@ class CommentsController < ApplicationController
 	def create
 		@picture = Picture.find(params[:picture_id])
 		@comment = @picture.comments.create(params[:comment].permit(:message))
+		@comment.user_id = current_user.id
 		if @comment.save
 			redirect_to pictures_path
 		else 
@@ -19,9 +20,14 @@ class CommentsController < ApplicationController
 
 	def destroy
 		@comment = Comment.find(params[:id])
-		@comment.destroy
-		redirect_to pictures_path
-		flash[:notice] = "Comment deleted successfully"
+		if @comment.user_id == current_user.id
+			@comment.destroy
+			redirect_to pictures_path
+			flash[:notice] = "Comment deleted successfully"
+		else
+			edirect_to pictures_path
+			flash[:notice] = "You are not the author of this comment"
+		end
 	end
 
 end
