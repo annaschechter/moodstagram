@@ -5,4 +5,5 @@ class Picture < ActiveRecord::Base
 	validates_presence_of :image, :message => ": You did not choose a valid file"
   has_many :comments
   has_many :likes
+  validates :price, numericality: true
 end

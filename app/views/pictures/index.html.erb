@@ -3,6 +3,7 @@
 <% @pictures.each do |picture|%>
 	<li><%= link_to image_tag(picture.image.url(:thumb)), picture_path(picture), id: "#{picture.feeling}" %>
 	Feeling: <%= picture.feeling %>
+	£<%= picture.price.to_f %>
 	<%= link_to 'Like', picture_likes_path(picture), method: :create, id: "like-#{picture.feeling}" %>
 	Likes: <%= picture.likes.count %>
 	Comments:

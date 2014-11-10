@@ -86,5 +86,15 @@ describe 'pictures' do
 		
 	end
 
+	describe 'buying picture' do
+
+		it "can see the form after pressing 'buy now'" do
+			find('#happy').click
+			click_link 'Buy now'
+			expect(page).to have_css('form')
+		end
+
+	end
+
 
 end

@@ -15,7 +15,7 @@ class PicturesController < ApplicationController
 	end
 
 	def create
-			@picture = Picture.create(params[:picture].permit(:feeling, :image))
+			@picture = Picture.create(params[:picture].permit(:feeling, :image, :price))
 			@picture.user_id = current_user.id
 			if @picture.save
 				redirect_to pictures_path
@@ -31,7 +31,7 @@ class PicturesController < ApplicationController
 	def update
 		@picture = Picture.find(params[:id])
 		if @picture.user_id == current_user.id
-			@picture.update(params[:picture].permit(:feeling, :image))
+			@picture.update(params[:picture].permit(:feeling, :image, :price))
 			redirect_to pictures_path
 			flash[:notice] = "Picture edited successfully"
 		else
