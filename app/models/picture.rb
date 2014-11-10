@@ -4,4 +4,5 @@ class Picture < ActiveRecord::Base
   validates_attachment_content_type :image, :content_type => /\Aimage\/.*\Z/
 	validates_presence_of :image, :message => ": You did not choose a valid file"
   has_many :comments
+  has_many :likes
 end

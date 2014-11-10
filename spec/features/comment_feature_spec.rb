@@ -1,7 +1,7 @@
 require 'rails_helper'
 require 'helpers/helper'
 
-describe 'comment' do 
+describe 'comments' do 
 
 	before do 
 		user_sign_up
