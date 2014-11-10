@@ -3,6 +3,7 @@
 		click_link 'Post picture'
 		attach_file('Image', Rails.root + "spec/fixtures/images/bird.jpg")
 		fill_in 'Feeling', with: feeling  
+		fill_in 'Price', with: 5
 		click_button 'Create Picture'
 	end
 

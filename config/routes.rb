@@ -57,6 +57,7 @@ Rails.application.routes.draw do
   resources :pictures do
     resources :likes
     resources :comments
+    resources :charges
   end
 
   root to: "pictures#index"

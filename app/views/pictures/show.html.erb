@@ -14,4 +14,4 @@
 	<% end %>
 <%= link_to "Delete ##{@picture.feeling.downcase}", picture_path(@picture), method: :delete %>
 <%= link_to "Edit ##{@picture.feeling.downcase}", edit_picture_path(@picture) %>
-<%= link_to "Buy now ##{@picture.feeling.downcase}", picture_path(@picture) %>
+<%= link_to "Buy now ##{@picture.feeling.downcase}", picture_charges_path(@picture), method: :create %>
