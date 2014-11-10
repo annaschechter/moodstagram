@@ -17,11 +17,11 @@ class ChargesController < ApplicationController
 			:customer => customer.id,
 			:amount => @amount,
 			:description => "Picture of #{@pic.feeling}",
-			:currency => 'gbp'
+			:currency => 'gbp',
 		)
 
-		# rescue Stripe::CardError => e
-		# 	flash[:error] = e.message
-		# 	redirect_to new_picture_charge_path(@pic)
+		rescue Stripe::CardError => e
+			flash[:error] = e.message
+			redirect_to new_picture_charge_path(@pic)
 	end
 end
