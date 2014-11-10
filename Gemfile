@@ -45,4 +45,6 @@ gem 'devise'
 gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
 gem 'figaro'
 gem 'pry-rails', group: :development
+gem 'poltergeist', group: :test
+gem 'database_cleaner', group: :test
 

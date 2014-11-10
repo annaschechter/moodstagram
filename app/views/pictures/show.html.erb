@@ -1,5 +1,8 @@
 <%= image_tag(@picture.image.url(:thumb)) %>
 <%= @picture.feeling %>
+	Price: £<%= number_with_precision(@picture.price, precision: 2) %>
+	<%= link_to 'Like', picture_likes_path(@picture), method: :post %>
+	Likes: <%= @picture.likes.count %>
 	Comments: <%= @picture.comments.count %> 
 	<% if @picture.comments.any? %>
 		<% @picture.comments.each do |comment|%>

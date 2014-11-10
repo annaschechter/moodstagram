@@ -1,7 +1,7 @@
 <%= form_tag picture_charges_path do %>
   <article>
     <label class="amount">
-      <span>Amount: $<%= @pic.price %></span>
+      <span>Amount: $<%= number_with_precision(@pic.price, precision: 2) %></span>
     </label>
   </article>
 

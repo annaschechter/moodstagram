@@ -1,1 +1,1 @@
-<h2>Thanks, you paid <strong>$<%= @pic.price %></strong>!</h2>
+<h2>Thank you, your order is complete! You paid: <strong>$<%= number_with_precision(@pic.price, precision: 2) %></strong>!</h2>

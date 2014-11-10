@@ -97,6 +97,20 @@ describe 'pictures' do
 			expect(page).to have_css('form')
 		end
 
+		xit 'can be bought', js: true do
+			find('#happy').click
+			click_link('Buy now')
+			find('.stripe-button-el').click
+			stripe_iframe = all('iframe[name=stripe_checkout_app]').last
+			Capybara.within_frame stripe_iframe do
+				find('#email').set 'test@test.com'
+				find('#card_number').set '4242 4242 4242 4242'
+				find('#cc-exp').set 1216
+				find('#cc-csc').set 123
+				find('.iconTick').click
+			end
+			expect(page).to have_content 'Thank you, your order is complete!'
+		end
 	end
 
 
