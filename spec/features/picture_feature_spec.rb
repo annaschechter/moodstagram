@@ -51,18 +51,17 @@ describe 'pictures' do
 	describe 'deleting pictures' do
 
 		it 'can be deleted' do
-			create_picture("sad")
-			click_link 'Delete #happy'
+			visit '/pictures'
+			click_link 'Delete'
 			expect(page).not_to have_content 'happy'
 			expect(page).to have_content 'Picture deleted successfully'
-			expect(page).to have_content 'sad'
 		end
 
 		it 'only the author of the picture can see the link to delete the picture' do
 			click_link 'Sign out'
 			user_sign_up("sam@test.com", 91234567)
 			visit '/pictures'
-			expect(page).not_to have_link 'Delete #happy'
+			expect(page).not_to have_link 'Delete'
 		end
 
 	end
@@ -70,7 +69,7 @@ describe 'pictures' do
 	describe 'editing pictures' do
 
 		it 'can be edited' do
-			click_link 'Edit #happy'
+			click_link 'Edit'
 			fill_in 'Feeling', with: "not happy"
 			click_button 'Update Picture'
 			expect(page).to have_content 'Picture edited successfully'
@@ -81,12 +80,16 @@ describe 'pictures' do
 			click_link 'Sign out'
 			user_sign_up("sam@test.com", 91234567)
 			visit '/pictures'
-			expect(page).not_to have_link 'Edit #happy'
+			expect(page).not_to have_link 'Edit'
 		end
 		
 	end
 
 	describe 'buying picture' do
+
+		it 'every picture has a price' do
+			expect(page).to have_content 'Price: £5.00'
+		end
 
 		it "can see the form after pressing 'buy now'" do
 			find('#happy').click

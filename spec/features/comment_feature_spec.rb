@@ -10,18 +10,19 @@ describe 'comments' do
 
 	it 'users can leave a comment for a picture' do
 		leave_comment_for_happy
+		find('#happy').click
 		expect(page).to have_content 'message'
 	end
 
 	it 'only signed in users can leave a comment for a picture' do
 		click_link 'Sign out'
-		find('#comment-happy').click
+		click_link 'Comment'
 		expect(page).not_to have_button 'Post comment'
 		expect(page).to have_content 'Log in'
 	end 
 
 	it 'only allows to post non-empty comments' do
-		find('#comment-happy').click
+		click_link "Comment"
 		fill_in 'Message', with: ' '
 		click_button 'Post comment'
 		expect(page).to have_content 'Your comment cannot be blank!'
@@ -29,8 +30,10 @@ describe 'comments' do
 
 	it 'users can delete comments' do
 		leave_comment_for_happy
-		find('#delete-comment-message').click
+		find('#happy').click
+		click_link 'Delete comment'
 		expect(page).to have_content 'Comment deleted successfully'
+		find('#happy').click
 		expect(page).not_to have_content 'message'
 	end
 
@@ -38,7 +41,7 @@ describe 'comments' do
 		leave_comment_for_happy
 		click_link 'Sign out'
 		user_sign_up("sam@test.com", 91234567)
-		visit '/pictures'
+		find('#happy').click
 		expect(page).not_to have_selector'#delete-comment-message'
 	end
 	

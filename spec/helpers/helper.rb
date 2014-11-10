@@ -5,6 +5,7 @@
 		fill_in 'Feeling', with: feeling  
 		fill_in 'Price', with: 5
 		click_button 'Create Picture'
+		@picture_id = (Picture.last).id
 	end
 
 	def user_sign_up(email="anna@test.com", password=12345678)
@@ -18,7 +19,7 @@
 
 	
 	def leave_comment_for_happy
-		find('#comment-happy').click
+		click_link 'Comment'
 		fill_in 'Message', with: 'message'
 		click_button 'Post comment'
 	end

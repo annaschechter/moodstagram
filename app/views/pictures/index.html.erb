@@ -3,26 +3,14 @@
 <% @pictures.each do |picture|%>
 	<li><%= link_to image_tag(picture.image.url(:thumb)), picture_path(picture), id: "#{picture.feeling}" %>
 	Feeling: <%= picture.feeling %>
-	£<%= picture.price.to_f %>
-	<%= link_to 'Like', picture_likes_path(picture), method: :create, id: "like-#{picture.feeling}" %>
+	Price: £<%= number_with_precision(picture.price, precision: 2) %>
+	<%= link_to 'Like', picture_likes_path(picture), method: :post %>
 	Likes: <%= picture.likes.count %>
-	Comments:
-	<% if picture.comments.any? %>
-		<%= picture.comments.each do |comment|%>
-			<%= comment.created_at %>
-			By: <%= (User.find(comment.user_id)).email %>
-			<%= comment.message %>
-			<% if user_signed_in? && current_user.id == comment.user_id %>
-				<%= link_to "Delete comment", picture_comment_path(picture, comment), method: :delete, id: "delete-comment-#{comment.message}" %>
-			<% end %>
-		<% end %>
-	<% else %>
-		No comments yet
-	<% end %>
-	<%= link_to "Comment", new_picture_comment_path(picture), id: "comment-#{picture.feeling}" %>
+	Comments: <%= picture.comments.count %> 
+	<%= link_to "Comment", new_picture_comment_path(picture) %>
 	<% if user_signed_in? && current_user.id == picture.user_id %>
-		<%= link_to "Delete ##{picture.feeling.downcase}", picture_path(picture), method: :delete %>
-		<%= link_to "Edit ##{picture.feeling.downcase}", edit_picture_path(picture) %>
+		<%= link_to "Delete", picture_path(picture), method: :delete %>
+		<%= link_to "Edit", edit_picture_path(picture) %>
 	<% end %></li>
 	</ul>
 <% end %>

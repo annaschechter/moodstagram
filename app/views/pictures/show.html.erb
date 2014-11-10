@@ -1,17 +1,18 @@
 <%= image_tag(@picture.image.url(:thumb)) %>
 <%= @picture.feeling %>
-	Comments:
-	<ul>
+	Comments: <%= @picture.comments.count %> 
 	<% if @picture.comments.any? %>
-		<%= @picture.comments.each do |comment|%>
-			<li><%= comment.created_at %>
+		<% @picture.comments.each do |comment|%>
+			<%= comment.created_at %>
+			By: <%= (User.find(comment.user_id)).email %>
 			<%= comment.message %>
-			</li>
+			<% if user_signed_in? && current_user.id == comment.user_id %>
+				<%= link_to "Delete comment", picture_comment_path(@picture, comment), method: :delete %>
+			<% end %>
 		<% end %>
-	</ul>
 	<% else %>
 		No comments yet
 	<% end %>
-<%= link_to "Delete ##{@picture.feeling.downcase}", picture_path(@picture), method: :delete %>
-<%= link_to "Edit ##{@picture.feeling.downcase}", edit_picture_path(@picture) %>
-<%= link_to "Buy now ##{@picture.feeling.downcase}", picture_charges_path(@picture), method: :post %>
+<%= link_to "Delete picture", picture_path(@picture), method: :delete %>
+<%= link_to "Edit picture", edit_picture_path(@picture) %>
+<%= link_to "Buy now", picture_charges_path(@picture), method: :post %>
