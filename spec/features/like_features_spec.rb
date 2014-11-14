@@ -15,9 +15,14 @@ describe 'likes' do
 
 	it 'users can only like a picture once' do
 		click_link 'Like'
-		expect(page).to have_content 'Likes: 1'
-		click_link 'Like'
-		expect(page).to have_content 'Likes: 1'
+		expect(page).to have_link 'Unlike'
+		expect(page).not_to have_link 'Like'
 	end
-	
+
+	it 'users can unlike picture' do
+		click_link 'Like'
+		click_link 'Unlike'
+		expect(page).to have_content 'Likes: 0'
+	end
+
 end

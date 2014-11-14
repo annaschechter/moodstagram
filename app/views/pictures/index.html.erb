@@ -4,7 +4,14 @@
 	<li><%= link_to image_tag(picture.image.url(:thumb)), picture_path(picture), id: "#{picture.feeling}" %>
 	Feeling: <%= picture.feeling %>
 	Price: £<%= number_with_precision(picture.price, precision: 2) %>
-	<%= link_to 'Like', picture_likes_path(picture), method: :post %>
+	<% if user_signed_in? %>
+			<% @like = Like.find_by_picture_id_and_user_id(picture.id, current_user.id) %>
+			<% if @like == nil %>
+				<%= link_to 'Like', picture_likes_path(picture), method: :post %>
+			<% else %>
+				<%= link_to 'Unlike', picture_like_path(picture, @like), method: :delete %>
+			<% end %>
+	<% end %>
 	Likes: <%= picture.likes.count %>
 	Comments: <%= picture.comments.count %> 
 	<%= link_to "Comment", new_picture_comment_path(picture) %>
