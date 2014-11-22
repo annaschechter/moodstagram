@@ -16,7 +16,7 @@ class LikesController < ApplicationController
 			redirect_to pictures_path
 		else 
 			redirect_to pictures_path
-			flas[:error] = "You can only unlike pictures if you've liked it"
+			flash[:error] = "You can only unlike pictures if you've liked it"
 		end
 	end
 
