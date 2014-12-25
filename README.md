@@ -8,6 +8,7 @@ Moodstagram is a clone of the popular photosharing apllication Instagram. In Moo
 * users can post pictures
 * users write comments on pictures
 * users can like pictures
+* users can purchase other users' moods
 
 Languages and Tools
 -------------------

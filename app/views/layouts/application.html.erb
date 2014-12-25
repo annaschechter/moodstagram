@@ -10,20 +10,25 @@
 <body>
 	<section class=templateholder>
 		<header class=Layout7_header>
-			<%= link_to 'Moodstagram', pictures_path, id: "logo" %> 
+
+			<%= link_to 'Moodstagram', pictures_path, id: "logo" %><br/>
+			<section id="nav-bar">
+				<%= link_to "HOME", pictures_path, class: "link" %> 
+				<% if user_signed_in? %>
+					<%= link_to 'SIGN OUT', destroy_user_session_path, method: :delete, class: "link" %>
+				<% else %>
+					<%= link_to 'SIGN IN', new_user_session_path, class: "link" %>
+					<%= link_to 'SIGN UP', new_user_registration_path, class: "link" %>
+				<% end %> 
+			</section>
 		</header>
 		<section id="links-and-messages">
-			<% if user_signed_in? %>
-				<%= link_to 'Sign out', destroy_user_session_path, method: :delete, class: "link" %>
-			<% else %>
-				<%= link_to 'Sign in', new_user_session_path, class: "link" %>
-				<%= link_to 'Sign up', new_user_registration_path, class: "link" %>
-			<% end %> 
+
 			<%= flash[:notice] %>
 	    <%= flash[:error] %>
 		</section>
 		<section class=Layout7_1 ></section>
-		<section class=Layout7_2 >
+		<section class=middle >
 	    <%= yield %></section>
 	 	<section class=Layout7_3 ></section>
 	 	<section class=Layout7_4 ></section>
