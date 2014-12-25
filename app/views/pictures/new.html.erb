@@ -1,14 +1,16 @@
-<% @picture.errors.full_messages.each do |msg| %>
-	<%= msg %>
-<% end %>
 
+<article class="mood">
+  <%= form_for @picture, :html => { :multipart => true } do |f| %>
+  	<p><%= f.label :image %></p>
+  	<p><%= f.file_field :image %></p>
+  	<p><%= f.label :mood %></p>
+  	<p><%= f.text_field :feeling %></p>
+    <p><%= f.label :price %></p>
+    <p><%= f.text_field :price %></p>
+  	<p><%= f.submit %></p>
+  <% end %>
+  <% @picture.errors.full_messages.each do |msg| %>
+    <h4 class="notice2"><%= msg %></h4>
+  <% end %>
+</article>
 
-<%= form_for @picture, :html => { :multipart => true } do |f| %>
-	<%= f.label :image %>
-	<%= f.file_field :image %>
-	<%= f.label :feeling %>
-	<%= f.text_field :feeling %>
-  <%= f.label :price %>
-  <%= f.text_field :price %>
-	<%= f.submit %>
-<% end %>

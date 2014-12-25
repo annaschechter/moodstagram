@@ -1,21 +1,37 @@
-<%= image_tag(@picture.image.url(:thumb)) %>
-<%= @picture.feeling %>
-	Price: £<%= number_with_precision(@picture.price, precision: 2) %>
-	<%= link_to 'Like', picture_likes_path(@picture), method: :post %>
-	Likes: <%= @picture.likes.count %>
-	Comments: <%= @picture.comments.count %> 
+<article class="mood">
+	<section id="mood-details">
+		<p id="author">AUTHOR: <%= User.find(@picture.user_id).email.split('@')[0]%></p>
+		<p id="feeling">MOOD: <%= @picture.feeling %></p>
+	</section>
+	<p id="price">PRICE: £<%= number_with_precision(@picture.price, precision: 2)%></p><br/>
+	<h1 id="buy-now"><%= link_to "BUY NOW", picture_charges_path(@picture), method: :post %></h1> 
+	<%= image_tag(@picture.image.url, :class=>'picture') %><br/>
+	<% if user_signed_in? %>
+		<% @like = Like.find_by_picture_id_and_user_id(@picture.id, current_user.id) %>
+		<% if @like == nil %>
+			<p class="option"><%= link_to 'LIKE', picture_likes_path(@picture), method: :post %></p>
+		<% else %>
+			<p class="option"><%= link_to 'UNLIKE', picture_like_path(@picture, @like), method: :delete %></p>
+		<% end %>
+	<% end %>
+	<p class="option"><%= link_to "COMMENT", new_picture_comment_path(@picture) %></p>
+	<% if user_signed_in? && current_user.id == @picture.user_id %>
+		<p class="option"><%= link_to "DELETE", picture_path(@picture), method: :delete %></p>
+		<p class="option"><%= link_to "EDIT", edit_picture_path(@picture) %></p>
+	<% end %><br/>
+	<p>LIKES: <%= @picture.likes.count %>
+	COMMENTS: <%= @picture.comments.count %></p>
+
 	<% if @picture.comments.any? %>
 		<% @picture.comments.each do |comment|%>
-			<%= comment.created_at %>
-			By: <%= (User.find(comment.user_id)).email %>
-			<%= comment.message %>
+			<p id="comment"><%= comment.created_at %>
+			by: <%= (User.find(comment.user_id)).email.split('@')[0] %><br/>
+			<%= comment.message %></p>
 			<% if user_signed_in? && current_user.id == comment.user_id %>
-				<%= link_to "Delete comment", picture_comment_path(@picture, comment), method: :delete %>
+				<p class="option"><%= link_to "DELETE COMMENT", picture_comment_path(@picture, comment), method: :delete %></p>
 			<% end %>
 		<% end %>
 	<% else %>
-		No comments yet
+		<p>No comments yet</p>
 	<% end %>
-<%= link_to "Delete picture", picture_path(@picture), method: :delete %>
-<%= link_to "Edit picture", edit_picture_path(@picture) %>
-<%= link_to "Buy now", picture_charges_path(@picture), method: :post %>
+</article>

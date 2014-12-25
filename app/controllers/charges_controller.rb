@@ -1,5 +1,7 @@
 class ChargesController < ApplicationController
 
+before_action :authenticate_user!
+
 	def new
 		@pic = Picture.find(params[:picture_id])
 	end
@@ -7,12 +9,10 @@ class ChargesController < ApplicationController
 	def create
 		@pic = Picture.find(params[:picture_id])
 		@amount = (@pic.price * 100).to_i
-		
 		customer = Stripe::Customer.create(
 			:email => User.find(current_user.id).email,
 			:card => params[:stripeToken]
 		)
-
 		charge = Stripe::Charge.create(
 			:customer => customer.id,
 			:amount => @amount,

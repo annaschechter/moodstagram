@@ -115,6 +115,29 @@ p {
 	font-color: #424242;
 }
 
+#buy-now {
+	float: right;
+	padding-right: 4%;
+}
+
+#comment {
+	background-color: lightgrey;
+	margin: 1%;
+}
+
+.notice {
+	color: white;
+	float: right;
+	padding: 2%;
+}
+
+.notice2 {
+	color: red;
+	float: right;
+	padding: 2%;
+	background-color: white;
+}
+
 
 
 

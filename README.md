@@ -1,13 +1,13 @@
 Moodstagram
 ===========
-Yelp Clone is the week 8 project at Makers Academy. In this we learnt to Ruby-on-Rails applications.
+Moodstagram is the week 8, individual challenge at Makers Academy. This challenge is testing our skills of building Ruby-on-Rails applications. 
 Specification
 -------------
 Moodstagram is a clone of the popular photosharing apllication Instagram. In Moodstagram users can share photos which reflect their mood/feelings on a particular day or at a paticular time. Moodstagram has the following functionality:
 * users can sign-up, log-in and log-out
-* users can post pictures
-* users write comments on pictures
-* users can like pictures
+* users can post moods (mood includes a picture and the authors' mood)
+* users write comments on moods
+* users can like moods
 * users can purchase other users' moods
 
 <img src="https://s3-eu-west-1.amazonaws.com/annas-first-test-bucket/moodstagram.png">
@@ -18,6 +18,7 @@ Languages and Tools
 * PostgreSQL
 * RSpec
 * Capybara
+* Stripe
 * HTML
 * CSS
 
@@ -55,4 +56,6 @@ Start the app:
 $ rails s
 ```
 In your browser visit http://localhost:3000/
+
+In order to use the payment system please register application with stripe and provide stripe api key and secret in config/secrets.yml
 
