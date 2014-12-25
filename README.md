@@ -10,6 +10,7 @@ Moodstagram is a clone of the popular photosharing apllication Instagram. In Moo
 * users can like pictures
 * users can purchase other users' moods
 
+<img src="https://s3-eu-west-1.amazonaws.com/annas-first-test-bucket/moodstagram.png">
 Languages and Tools
 -------------------
 * Ruby
