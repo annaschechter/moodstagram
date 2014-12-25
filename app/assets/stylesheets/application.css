@@ -23,11 +23,9 @@ body {
 	float:left;
 }						
 .middle{
-	background-color:white;
 	margin-top: 2.5%;
 	margin-bottom: 3%;
 	width:60%; 
-	 
 	float:left; 
 	height:800px; 
 }						
@@ -71,3 +69,56 @@ margin-left: 5%;
 	padding: .8%;
 	padding-left: 3%;
 }
+
+.mood {
+	background-color: white;
+	margin-top: 3%;
+	border: solid 2px #f2ce00;
+}
+
+#post-your-mood {
+	color: white;
+	font-size: 2vw;
+}
+
+p {
+	padding-right: 1vw;
+	padding-left: 1vw;
+	font-size: 1.5vw;
+	font-weight: bold;
+	color: #424242;
+}
+
+#price {
+	display: inline-block;
+	background-color: #f2ce00; 
+	float: right;
+	border: solid 2px;
+	margin-right: 1vw;
+	border-radius: 8px;
+}
+
+#mood-details {
+	display: inline-block;
+}
+
+.picture {
+	width: 90%;
+	height: auto;
+	padding: 5%;
+}
+
+.option {
+	display: inline-block;
+	margin-top: 0%;
+	text-decoration: none;
+	font-color: #424242;
+}
+
+
+
+
+
+
+
+

@@ -1,23 +1,26 @@
-<%= link_to "Post picture", new_picture_path %>
-<ul>
+<%= link_to "POST YOUR MOOD", new_picture_path, id: "post-your-mood" %>
 <% @pictures.each do |picture|%>
-	<li><%= link_to image_tag(picture.image.url(:thumb)), picture_path(picture), id: "#{picture.feeling}" %>
-	Feeling: <%= picture.feeling %>
-	Price: £<%= number_with_precision(picture.price, precision: 2) %>
-	<% if user_signed_in? %>
-			<% @like = Like.find_by_picture_id_and_user_id(picture.id, current_user.id) %>
-			<% if @like == nil %>
-				<%= link_to 'Like', picture_likes_path(picture), method: :post %>
-			<% else %>
-				<%= link_to 'Unlike', picture_like_path(picture, @like), method: :delete %>
-			<% end %>
-	<% end %>
-	Likes: <%= picture.likes.count %>
-	Comments: <%= picture.comments.count %> 
-	<%= link_to "Comment", new_picture_comment_path(picture) %>
-	<% if user_signed_in? && current_user.id == picture.user_id %>
-		<%= link_to "Delete", picture_path(picture), method: :delete %>
-		<%= link_to "Edit", edit_picture_path(picture) %>
-	<% end %></li>
-	</ul>
+	<article class="mood">
+		<section id="mood-details">
+			<p id="author">AUTHOR: <%= User.find(picture.user_id).email.split('@')[0]%></p>
+			<p id="feeling">MOOD: <%= picture.feeling %></p>
+		</section>
+		<p id="price">PRICE: £<%= number_with_precision(picture.price, precision: 2)%></p><br/>
+		<%= link_to image_tag(picture.image.url, :class=>'picture'), picture_path(picture), id: "#{picture.feeling}"%><br/>
+		<% if user_signed_in? %>
+				<% @like = Like.find_by_picture_id_and_user_id(picture.id, current_user.id) %>
+				<% if @like == nil %>
+					<p class="option"><%= link_to 'LIKE', picture_likes_path(picture), method: :post %></p>
+				<% else %>
+					<p class="option"><%= link_to 'UNLIKE', picture_like_path(picture, @like), method: :delete %></p>
+				<% end %>
+		<% end %>
+		<p class="option"><%= link_to "COMMENT", new_picture_comment_path(picture) %></p>
+		<% if user_signed_in? && current_user.id == picture.user_id %>
+			<p class="option"><%= link_to "DELETE", picture_path(picture), method: :delete %></p>
+			<p class="option"><%= link_to "EDIT", edit_picture_path(picture) %></p>
+		<% end %><br/>
+		<p>LIKES: <%= picture.likes.count %>
+		 COMMENTS: <%= picture.comments.count %></p>
+	</article>
 <% end %>
